@@ -1,0 +1,32 @@
+language: php
+
+php:
+  - 5.4
+  - 5.5
+  - 5.6
+  - hhvm
+  - hhvm-nightly
+
+before_script:
+  - composer selfupdate
+  - composer install --dev
+  - OCULAR_ENV='5.5'
+
+script:
+  - phpunit --coverage-text --coverage-clover=coverage.clover
+  - vendor/bin/phpcs --standard=./phpcs.xml -n --report=gitblame ./src
+  - if [ $(phpenv version-name) = $OCULAR_ENV ]; then wget https://scrutinizer-ci.com/ocular.phar; php ocular.phar code-coverage:upload --format=php-clover coverage.clover; fi
+  - vendor/bin/bugfree lint src/
+
+matrix:
+  fast_finish: true
+  allow_failures:
+    - php: hhvm-nightly
+
+notifications:
+  webhooks:
+    urls:
+      - http://derricks.io/repositories/buildhook/
+    on_success: always
+    on_failure: always
+    on_start: true

@@ -1,0 +1,30 @@
+{
+    "name": "aztech/closure-scope-merger",
+    "description": "SuperClosures with scope reconciliation",
+    "license": "MIT",
+    "keywords": [
+        "aztech",
+        "aztech-digital"
+    ],
+    "type": "library",
+    "minimum-stability": "stable",
+    "autoload": {
+        "psr-4": {
+            "Aztech\\Closure\\": "src/"
+        }
+    },
+    "require": {
+        "php": ">= 5.4",
+        "jeremeamia/SuperClosure": "*"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "~4.2",
+        "squizlabs/php_codesniffer": "~1.5",
+        "vektah/bugfree-dangerzone": "~0.2"
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "1.1.x-dev"
+        }
+    }
+}
