@@ -1,12 +1,12 @@
-php-skeleton-library
+closure-scope-merger
 ====================
 
-Skeleton for PHP library projects
+SuperClosure extension which allows to extract to reconcile a scope with the resulting scope of an executed SuperClosure after it has been unserialized.
 
-This is my personal PHP library skeleton for use with Composer. Use it or don't, improve it or not, do whatever you like, but P/R your changes if they're interesting :p
+This allows to arbitrarily execute code anywhere, and import the resulting scope into your execution scope byeffectively overriding variables in the current scope with their counterparts in the executed closure's scope.
+
+As such, it can be **dangerous** to use this library recklessly.
 
 ## Use
 
-```shell
-composer create-project aztech/php-skeleton-library <target-dir>
-```
+Look at the unit tests :p
