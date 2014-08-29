@@ -18,6 +18,10 @@ class MergeableClosure extends SerializableClosure
 
     public function reconcileScope(MergeableClosure $scopeProvider)
     {
+        if (! $this->state) {
+            $this->createState();
+        }
+        
         $selfReflection = new \ReflectionFunction($this->getClosure());
         $selfLocals = $selfReflection->getStaticVariables();
 
@@ -25,11 +29,11 @@ class MergeableClosure extends SerializableClosure
         $otherLocals = $otherReflection->getStaticVariables();
 
         $parser = new ClosureParser($this->getReflection());
-
+        
         foreach ($parser->getClosureAbstractSyntaxTree()->uses as $use) {
             if ($use->byRef) {
-                $localVar = $selfLocals[$use->var];
-                $selfLocals[$use->var] = $otherLocals[$use->var];
+                $localVar =& $selfLocals[$use->var];
+                $localVar = $otherLocals[$use->var];
             }
         }
     }
